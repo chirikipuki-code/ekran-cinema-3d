@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101016">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Выберите место, посмотрите на экран из зала и оформите билет.">
+  <title>Экран — билет с видом</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/enhanced.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Экран — на главную"><span class="brand-mark">Э<span>·</span></span><span>ЭКРАН<small>кино ближе</small></span></a>
+      <nav class="topnav" aria-label="Навигация"><a href="/#films">Афиша</a><a href="/#how">Как это работает</a><button id="my-tickets" type="button">Мои билеты <span id="wallet-count"></span></button><button id="account-button" type="button">Войти</button></nav>
+      <button id="wallet-mobile" class="wallet-mobile" type="button">Мои билеты</button><span class="topbar-note"><span class="live-dot"></span> Выбирайте с уверенностью</span>
+    </header>
+
+    <main id="main">
+      <section class="intro" id="home-intro">
+        <video id="hero-video" class="hero-video" autoplay loop playsinline preload="auto" poster="/media/hero-poster.jpg" aria-label="Видео о выборе места в кинотеатре">
+          <source data-src="/media/hero-cinema.mp4" type="video/mp4">
+        </video>
+        <div class="intro-copy"><span class="eyebrow">КИНОТЕАТР, КОТОРЫЙ ВЫ ВИДИТЕ ЗАРАНЕЕ</span><h1>Твой билет.<br><em>Твой ракурс.</em></h1><p>Загляните в зал до сеанса. Найдите идеальное место, осмотритесь в 3D и заберите билет за пару шагов.</p><div class="intro-points"><span><b>01</b> Выберите кресло</span><span><b>02</b> Откройте 3D</span><span><b>03</b> Заберите билет</span></div><button id="install-app" class="install-app" type="button">Установить приложение на телефон ↗</button></div>
+        <button id="hero-sound" class="hero-sound" type="button" aria-pressed="false"><span aria-hidden="true">◖</span><span id="hero-sound-label">Включить звук</span></button>
+      </section>
+
+      <section class="catalog-section" id="films" aria-labelledby="catalog-title">
+        <div class="catalog-heading"><div><span class="eyebrow">КИНОСТАР · ГРОЗНЫЙ МОЛЛ</span><h2 id="catalog-title">Выберите историю.<br><em>Примерьте место.</em></h2><p>Откройте фильм, выберите сеанс и посмотрите на экран из своего кресла.</p></div><span class="catalog-count" id="catalog-count"></span></div>
+        <div class="spotlight" id="spotlight" hidden><img class="spotlight-backdrop" id="spotlight-backdrop" alt=""><div class="spotlight-shade"></div><div class="spotlight-copy"><span class="spotlight-kicker"><span class="spotlight-sparkle">✦</span> ИСТОРИЯ ВЕЧЕРА</span><h3 id="spotlight-title"></h3><p id="spotlight-description"></p><div class="spotlight-meta"><span id="spotlight-genre"></span><span id="spotlight-time"></span></div><a id="spotlight-link" class="button primary" href="#films">Открыть фильм <span>↗</span></a></div><img class="spotlight-poster" id="spotlight-poster" alt=""></div>
+        <div class="catalog-tools"><label for="film-search">Найти фильм</label><input id="film-search" type="search" placeholder="Название фильма или мультфильма" autocomplete="off"><div class="catalog-filters" role="group" aria-label="Категория"><button class="active" data-filter="all" type="button">Все</button><button data-filter="animation" type="button">Мультфильмы</button><button data-filter="movie" type="button">Фильмы</button></div></div>
+        <div class="film-grid" id="film-grid"></div><p id="catalog-empty" class="catalog-empty" hidden>По этому запросу фильмов нет.</p>
+        <p class="catalog-source">Афиша <a href="https://kinostar-groznymall.com/" target="_blank" rel="noopener noreferrer">Киностар · Грозный Молл</a> на 7 ноября 2026 года. Выбор места и билет на этом сайте демонстрационные.</p>
+      </section>
+
+      <section class="film-hero" id="film-hero" hidden aria-labelledby="film-title"><a class="film-back" href="/#films">← Все фильмы</a><div class="film-hero-art"><img id="film-poster" alt=""><div class="film-hero-gradient"></div></div><div class="film-hero-copy"><span class="eyebrow" id="film-eyebrow">КИНОСТАР · ГРОЗНЫЙ МОЛЛ</span><h1 id="film-title"></h1><div class="film-meta" id="film-meta"></div><p id="film-description"></p><div class="film-hero-actions"><a class="button primary" href="#booking">Выбрать место <span>↗</span></a><a id="film-source" class="film-source-link" target="_blank" rel="noopener noreferrer">Страница фильма в кинотеатре ↗</a></div><span class="trailer-status" id="trailer-status"></span></div><img class="film-hero-poster" id="film-poster-card" alt=""></section>
+
+      <section class="booking-grid" id="booking" aria-label="Выбор билета" hidden>
+        <div class="selection-panel panel">
+          <div class="section-kicker"><span class="step-num">01</span> ВЫБЕРИТЕ СЕАНС</div>
+          <h2>Планируйте вечер</h2>
+          <label class="field-label" for="cinema-select">Кинотеатр</label>
+          <div class="select-wrap"><select id="cinema-select" aria-label="Выберите кинотеатр"></select><span aria-hidden="true">⌄</span></div>
+          <div id="cinema-address" class="field-hint"></div>
+          <div class="field-label movie-heading">Фильм</div>
+          <div id="movie-list" class="movie-list" role="group" aria-label="Выбранный фильм"></div>
+          <p class="movie-tagline" id="movie-tagline"></p>
+          <div class="show-head"><span class="field-label">Дата и время</span><span id="hall-name" class="hall-name"></span></div>
+          <div id="date-list" class="date-list" role="group" aria-label="Выберите дату"></div>
+          <div id="time-list" class="time-list" role="group" aria-label="Выберите время"></div>
+          <p class="schedule-note">Схема зала, цены и сеансы после 7 ноября — демонстрационные. Билет не действует в кинотеатре.</p>
+        </div>
+
+        <div class="experience-panel panel">
+          <div class="experience-heading"><div><div class="section-kicker"><span class="step-num">02</span> ВЫБЕРИТЕ МЕСТО</div><h2>Ваш зал, ваш ракурс</h2></div><span class="hall-badge" id="seat-count"></span></div>
+          <div class="recommendations" role="group" aria-label="Подбор места"><span>ПОДОБРАТЬ:</span><button id="best-seat" type="button">✦ Лучший обзор</button><button id="near-seat" type="button">↗ Ближе</button><button id="budget-seat" type="button">₽ Выгоднее</button><button id="view-map-toggle" type="button" aria-pressed="false">◉ Карта ракурса</button></div>
+          <div class="hall-area">
+            <div class="screen-line"><span>ЭКРАН</span></div>
+            <div id="seat-map" class="seat-map" role="group" aria-label="Схема мест"></div>
+            <div class="map-legend"><span><i class="legend-seat free"></i> Свободно</span><span><i class="legend-seat taken"></i> Занято</span><span><i class="legend-seat chosen"></i> Ваше место</span></div>
+            <div class="view-map-legend" id="view-map-legend" hidden><span><i></i> Прямой обзор</span><span><i></i> Умеренный угол</span><span><i></i> Сбоку / далеко</span><small>Ориентир для демонстрационного зала</small></div>
+          </div>
+          <div class="selection-summary" id="selection-summary"><div><span class="summary-kicker">ВАШ ВЫБОР</span><strong id="summary-seat">Выберите место на схеме</strong><small id="summary-context">Чтобы увидеть вид с кресла</small></div><div class="summary-right"><strong id="summary-price">—</strong><button id="view-button" class="button secondary" type="button" disabled>Вид с места <span>↗</span></button></div></div>
+          <div class="view-insight" id="view-insight" hidden><div class="view-score-ring" id="view-score-ring"><strong id="view-score">—</strong><small>/ 100</small></div><div class="view-insight-copy"><span>ОЦЕНКА РАКУРСА · ОРИЕНТИР</span><strong id="view-insight-title"></strong><small id="view-insight-description"></small></div><div class="view-insight-facts"><span><b id="view-angle"></b> угол к экрану</span><span><b id="view-distance"></b> дистанция</span></div></div>
+        </div>
+      </section>
+
+      <section class="preview-section" id="preview-section" hidden>
+        <div class="preview-top"><div><div class="section-kicker"><span class="step-num">03</span> ПОСМОТРИТЕ ИЗ ЗАЛА</div><h2 id="preview-title">Вид с вашего места</h2><p id="preview-description">Настоящий ракурс с выбранной точки зала.</p></div><button id="back-button" class="text-button" type="button">← Вернуться к местам</button></div>
+        <div class="mode-bar"><div class="mode-switch" role="group" aria-label="Режим 3D"><button id="mode-seat" class="active" type="button" aria-pressed="true">◉ Вид с кресла</button><button id="mode-overview" type="button" aria-pressed="false">▦ Весь зал</button></div><div class="mode-tools"><button id="look-left" type="button" aria-label="Посмотреть влево">←</button><button id="look-reset" type="button">Сбросить взгляд</button><button id="look-right" type="button" aria-label="Посмотреть вправо">→</button></div></div>
+        <div class="preview-layout"><div class="viewport-wrap"><canvas id="cinema-view" tabindex="0" aria-label="Интерактивный трёхмерный зал. Перетаскивайте для обзора, стрелки меняют направление взгляда"></canvas><div class="viewport-label"><span class="live-dot"></span> НАСТОЯЩИЙ 3D-ЗАЛ</div><div class="viewport-controls"><button id="viewport-sound" type="button" aria-label="Включить звук кино" aria-pressed="false" title="Включить звук кино">◖</button><button id="fullscreen-button" type="button" aria-label="На весь экран" title="На весь экран">⛶</button></div><div class="viewport-hint" id="viewport-hint">Потяните мышью или пальцем, чтобы осмотреться · колесо — масштаб</div><div class="viewport-error" id="viewport-error" hidden></div></div><aside class="preview-aside"><span class="aside-kicker">МЕСТО В ДЕТАЛЯХ</span><div class="big-seat" id="aside-seat">—</div><p id="aside-description"></p><div class="seat-nav"><button id="previous-seat" type="button">← Предыдущее</button><button id="next-seat" type="button">Следующее →</button></div><div class="aside-divider"></div><div class="insight"><span class="insight-icon">◎</span><div><strong>Перспектива зала</strong><small>Ракурс меняется при выборе любого места</small></div></div><button id="sound-button" class="sound-button" type="button" aria-pressed="false"><span id="sound-icon">◌</span><span><strong>Звук кино с этого места</strong><small id="sound-caption">Нажмите, чтобы услышать</small></span></button><div class="aside-divider"></div><div class="aside-total"><span>Билет</span><strong id="aside-price">—</strong></div><button id="checkout-button" class="button primary" type="button">Оформить билет <span>↗</span></button><small class="demo-note">Тестовая оплата · без списания денег</small></aside></div>
+      </section>
+
+      <section class="how-section" id="how"><div class="how-intro"><span class="eyebrow">ПРОСТОЙ ПУТЬ К ХОРОШЕМУ КИНО</span><h2>Всё видно заранее.</h2></div><div class="how-items"><div><span>01</span><strong>Найдите сеанс</strong><p>Выберите фильм и удобное время.</p></div><div><span>02</span><strong>Примерьте место</strong><p>Посмотрите на экран так, как увидите его из кресла.</p></div><div><span>03</span><strong>Получите билет</strong><p>Место сохранится за вами после оформления.</p></div></div></section>
+    </main>
+    <footer><span>ЭКРАН <span class="footer-dot">·</span> КИНО БЛИЖЕ</span><span>Демо-проект для хакатона · 2026</span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="checkout-modal" hidden><div class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="close-button" id="modal-close" type="button" aria-label="Закрыть">×</button><div class="section-kicker"><span class="step-num">04</span> ТЕСТОВАЯ ОПЛАТА</div><h2 id="modal-title">Ваш билет почти готов</h2><p class="modal-muted" id="modal-details"></p><div class="demo-card"><span>ЭКРАН <b>DEMO</b></span><strong id="demo-card-number">•••• •••• •••• 4242</strong><small>ТЕСТОВАЯ КАРТА · ДЕНЬГИ НЕ СПИСЫВАЮТСЯ</small></div><form id="checkout-form"><label class="field-label" for="test-card">Номер тестовой карты</label><input id="test-card" name="test-card" required inputmode="numeric" autocomplete="off" maxlength="19" placeholder="4242 4242 4242 4242" value="4242 4242 4242 4242"><div class="demo-card-options"><button type="button" data-demo-card="4242 4242 4242 4242">✓ Успешная оплата</button><button type="button" data-demo-card="4000 0000 0000 0002">× Отклонение</button></div><p class="demo-warning">Только тестовые номера выше. Не вводите данные настоящей карты. Сумма имитируется, денег никто не списывает. Билет после успешной проверки тоже демонстрационный.</p><div class="modal-actions"><strong id="modal-price">—</strong><button class="button primary" id="confirm-button" type="submit">Оплатить тестово <span>↗</span></button></div><p class="form-error" id="form-error" role="alert" hidden></p></form></div></div>
+  <div class="modal-backdrop" id="account-modal" hidden><div class="modal account-modal" role="dialog" aria-modal="true" aria-labelledby="account-title"><button class="close-button" id="account-close" type="button" aria-label="Закрыть">×</button><span class="eyebrow">ВАШИ КИНОВЕЧЕРА</span><h2 id="account-title">Создайте аккаунт</h2><p class="modal-muted" id="account-hint">Тестовая регистрация без подтверждения почты.</p><div class="auth-switch" role="group" aria-label="Вход или регистрация"><button id="auth-register-tab" class="active" type="button">Регистрация</button><button id="auth-login-tab" type="button">Вход</button></div><form id="account-form"><div id="account-name-wrap"><label class="field-label" for="account-name">Имя</label><input id="account-name" type="text" maxlength="80" autocomplete="name" placeholder="Как к вам обращаться" required></div><label class="field-label" for="account-email">Email</label><input id="account-email" type="email" maxlength="254" autocomplete="email" placeholder="name@example.com" required><label class="field-label" for="account-password">Пароль</label><input id="account-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" placeholder="Не менее 8 символов" required><button class="button primary auth-submit" id="account-submit" type="submit">Создать аккаунт ↗</button><p class="form-error" id="account-error" role="alert" hidden></p></form><div id="account-signed-in" hidden><p class="account-identity" id="account-identity"></p><button id="logout-button" class="button secondary" type="button">Выйти из аккаунта</button></div></div></div>
+  <div class="modal-backdrop" id="ticket-modal" hidden><div class="modal ticket-modal" role="dialog" aria-modal="true" aria-labelledby="ticket-title"><button class="close-button" id="ticket-close" type="button" aria-label="Закрыть">×</button><div class="ticket-success">✓</div><span class="eyebrow">МЕСТО ЗА ВАМИ</span><h2 id="ticket-title">Билет готов</h2><p class="modal-muted">Сохраните ссылку: по ней можно снова открыть билет.</p><div class="ticket-card"><div class="ticket-card-head">ЭКРАН <span>БИЛЕТ В КИНО</span></div><strong id="ticket-movie"></strong><span id="ticket-when"></span><div class="ticket-rule"></div><div class="ticket-meta"><div><small>КИНОТЕАТР</small><b id="ticket-cinema"></b></div><div><small>МЕСТО</small><b id="ticket-seat"></b></div><div><small>ИМЯ</small><b id="ticket-name"></b></div><div><small>ЦЕНА</small><b id="ticket-price"></b></div></div><div class="ticket-code" id="ticket-code"></div></div><div class="ticket-actions"><button class="button primary" id="copy-ticket" type="button">Скопировать ссылку</button><button class="button secondary" id="calendar-ticket" type="button">Добавить в календарь</button><button class="button secondary" id="print-ticket" type="button">Печать</button><button class="button secondary" id="done-ticket" type="button">Готово</button></div></div></div>
+  <div class="modal-backdrop" id="wallet-modal" hidden><div class="modal wallet-modal" role="dialog" aria-modal="true" aria-labelledby="wallet-title"><button class="close-button" id="wallet-close" type="button" aria-label="Закрыть">×</button><span class="eyebrow">ВАШИ ВЕЧЕРА</span><h2 id="wallet-title">Мои билеты</h2><p class="modal-muted">Билеты вашего аккаунта доступны на телефоне и компьютере.</p><div id="wallet-list" class="wallet-list"></div></div></div>
+  <nav class="mobile-dock" aria-label="Разделы приложения"><a href="/" aria-label="Главная"><span>⌂</span><small>Главная</small></a><a href="/#films" aria-label="Афиша"><span>▦</span><small>Афиша</small></a><button id="dock-tickets" type="button" aria-label="Мои билеты"><span>▤</span><small>Билеты</small></button><button id="dock-account" type="button" aria-label="Аккаунт"><span>◉</span><small>Аккаунт</small></button></nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "Экран — кино и билеты",
+  "short_name": "Экран",
+  "description": "Афиша, выбор места, 3D-вид из зала и демонстрационная покупка билета.",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0b10",
+  "theme_color": "#101016",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

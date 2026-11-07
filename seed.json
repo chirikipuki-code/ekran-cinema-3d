@@ -1,0 +1,12 @@
+{
+  "movies": [
+    {"id": "orbita", "title": "Орбита", "genre": "Фантастика · приключения", "duration_min": 128, "age": "12+", "theme": "violet", "tagline": "Путешествие начинается там, где кончается карта."},
+    {"id": "tishina", "title": "Тишина города", "genre": "Драма · детектив", "duration_min": 104, "age": "16+", "theme": "amber", "tagline": "У каждого города есть тайна."},
+    {"id": "glubina", "title": "Глубина", "genre": "Приключения · триллер", "duration_min": 116, "age": "12+", "theme": "blue", "tagline": "За горизонтом скрывается ответ."}
+  ],
+  "cinemas": [
+    {"id": "moskva", "name": "Экран · Москва", "address": "Москва, ул. Новый Арбат, 24", "hall": "Зал 1 · Премьера", "rows": 10, "seats_per_row": 14, "sofas": 7, "prices": {"front": 350, "middle": 550, "sofa": 900}, "schedule": [{"movie": "orbita", "times": ["12:30", "17:40", "21:10"]}, {"movie": "tishina", "times": ["14:20", "19:30"]}, {"movie": "glubina", "times": ["11:15", "16:10", "20:00"]}]},
+    {"id": "atrium", "name": "Экран · Атриум", "address": "Москва, ул. Земляной Вал, 33", "hall": "Зал 2 · Атмосфера", "rows": 9, "seats_per_row": 12, "sofas": 6, "prices": {"front": 390, "middle": 590, "sofa": 990}, "schedule": [{"movie": "orbita", "times": ["13:10", "18:50"]}, {"movie": "tishina", "times": ["12:00", "16:40", "21:30"]}, {"movie": "glubina", "times": ["15:20", "20:40"]}]},
+    {"id": "river", "name": "Экран · Речной", "address": "Москва, Фестивальная ул., 2", "hall": "Зал 3 · Панорама", "rows": 8, "seats_per_row": 10, "sofas": 5, "prices": {"front": 320, "middle": 520, "sofa": 850}, "schedule": [{"movie": "orbita", "times": ["11:40", "16:30", "20:50"]}, {"movie": "tishina", "times": ["14:15", "19:15"]}, {"movie": "glubina", "times": ["12:50", "18:00"]}]}
+  ]
+}
